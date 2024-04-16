@@ -2,6 +2,10 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return "HOME"
+
 @app.route('/submit', methods=['POST'])
 def submit():
     username = request.form['username']
@@ -11,7 +15,9 @@ def submit():
 @app.route('/search')
 def search():
     query = request.args.get('query')
-    return f"Searching for: {query}"
+    filter = request.args.get("filter")
+    return f"Searching for: {query}, {filter}"
+
 
 @app.route('/json/data', methods=['POST'])
 def get_data():
